@@ -1,0 +1,3 @@
+"D:\CLion 2023.1\bin\cmake\win\x64\bin\cmake.exe" -E rm -f CMakeFiles\rush-hour.dir/objects.a
+"D:\CLion 2023.1\bin\mingw\bin\ar.exe" qc CMakeFiles\rush-hour.dir/objects.a @CMakeFiles\rush-hour.dir\objects1
+"D:\CLion 2023.1\bin\mingw\bin\g++.exe" -O3  -g -Wl,--whole-archive CMakeFiles\rush-hour.dir/objects.a -Wl,--no-whole-archive -o rush-hour.exe -Wl,--out-implib,librush-hour.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\rush-hour.dir\linkLibs.rsp
