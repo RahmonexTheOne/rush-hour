@@ -9,5 +9,7 @@ $ make
 
 ## Exécution
 ```shell
+$ rush-hour 
+Or
 $ rush-hour [CHEMIN_DU_FICHIER]
 ```
