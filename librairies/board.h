@@ -14,13 +14,13 @@
 struct Move{
     unsigned int m_indexCar;
     Orientation m_orientation;
-    unsigned int m_longueur;
+    unsigned int m_lenght;
 
     explicit Move(){};
-    Move(int indexCar, Orientation orientation, unsigned int longueur)
+    Move(int indexCar, Orientation orientation, unsigned int lenght)
             : m_indexCar(indexCar),
               m_orientation(orientation),
-              m_longueur(longueur){};
+              m_lenght(lenght){};
 };
 
 class Board
@@ -38,6 +38,12 @@ public:
 
     //Generate a level without parsing any argument
     void generate();
+    //Create a list of Moves that generates the solution:(we need to take the list with smalest size after)
+    std::vector<Move> solutionList(const Board src);
+    //Send the result
+    std::vector<Move> solutionList();
+    //Move Car from a place to a direction with a specific lenght
+    void moveCar(int index, Orientation orientation, unsigned int lenght);
 
 
 
@@ -70,11 +76,21 @@ private:
     //List of all cars in the board
     std::vector<Car> listCar;
     //List of the moves (maybe give it a try)
-    std::vector<Move> m_listeMove;
+    std::vector<Move> m_listMoves;
     Place theExit;
+    //check if the car is on exit :
+    bool carIsOnExit() const;
+    bool carIsOnExit(Car car) const;
+    std::string to_string() const;
+    //Test the existence of the board in listBoard
+    static bool boardExist(std::unordered_set<std::string > listBoards,std::string stringBoard);
+    //Clone Board
+    Board cloneBoardWithPossibleMoves(Move move);
+    //Get a list of all possible moves arount the car
+    std::vector<struct Move> getListPossibleMoves(int indexElement);
+    bool canMove(Place src);
     //Main Car to exit
     int m_indexCarToExit;
-
 
 };
 

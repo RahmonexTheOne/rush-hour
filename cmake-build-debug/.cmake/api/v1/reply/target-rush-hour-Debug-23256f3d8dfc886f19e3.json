@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "project_source_files.exe"
+			"path" : "rush-hour.exe"
 		},
 		{
-			"path" : "project_source_files.pdb"
+			"path" : "rush-hour.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -28,13 +28,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 10,
+				"line" : 9,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 8,
+				"line" : 7,
 				"parent" : 0
 			}
 		]
@@ -76,7 +76,7 @@
 			]
 		}
 	],
-	"id" : "project_source_files::@6890427a1f51a3e7e1df",
+	"id" : "rush-hour::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -96,8 +96,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "project_source_files",
-	"nameOnDisk" : "project_source_files.exe",
+	"name" : "rush-hour",
+	"nameOnDisk" : "rush-hour.exe",
 	"paths" : 
 	{
 		"build" : ".",

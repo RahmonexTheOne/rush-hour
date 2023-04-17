@@ -3,9 +3,10 @@
 #include <time.h>
 
 
+void resolveTerminal(Board board);
+
 //-------------------------- If user want the game to be launched in terminal mode :
 int terminal_game(int arg, char *argu[]){
-    srand (time(NULL));
     Board board;
     //If has an argument load the board file parsed as argument
     if(arg > 1) {
@@ -21,17 +22,49 @@ int terminal_game(int arg, char *argu[]){
     } else {
         std::cout << "Generating level ..." << std::endl << std::endl;
         board.generate();
+
+
     }
 
     std::cout << "Level " << board.actualLevel << "\n" << board << std::endl;
 
-    //Make the Algorithm
-    //std::cout << "Generating a solution..." << std::endl << std::endl;
+    //Ask to get the solution
+    char askSolution;
+    std::cout << "Do you want to get the solution of the Level Yes (Y) or No (N)? : ";
+    std::cin >> askSolution;
+    if (askSolution == 'Y' || askSolution == 'y') {
+        std::cout << "Generating Solution...\n";
+        resolveTerminal(board);
+    }
+    else if (askSolution == 'N' || askSolution == 'n') {
+        std::cout << "Closing program...\n";
+        return EXIT_SUCCESS;
+    }
+    else {
+        std::cout << "Invalid response. Please enter either Y or N.\n";
+    }
 
 
     return EXIT_SUCCESS;
+}
+
+void resolveTerminal(Board board) {
+    //Solution (Algorithm)
+
+    //generating th list of moves that leads to the solution
+    std::vector<Move> listMoves = board.solutionList();
+
+    unsigned int i = 1;
+    //After each move displays the board
+    for(Move move : listMoves){
+        board.moveCar(move.m_indexCar, move.m_orientation, move.m_lenght);
+        std::cout <<"Move " << i++ <<"\n" << board << std::endl;
+    }
+
+    std::cout << "Total Moves : " << listMoves.size() << std::endl;
 };
 //------------------------------------------------------------------------------
+
 
 
 
