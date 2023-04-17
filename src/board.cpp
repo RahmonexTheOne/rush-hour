@@ -150,7 +150,10 @@ std::vector<Move> Board::solutionList(const Board src){
     }
 
     else{
+        //Increment actualLevel to go next level
+        actualLevel++;
         return board.m_listMoves;
+
     }
 
 }
@@ -158,6 +161,7 @@ std::vector<Move> Board::solutionList(const Board src){
 
 //-------Send result :
 std::vector<Move> Board::solutionList() {
+
     return this->solutionList(*this);
 }
 //----------------------------------------------------------------------------------------

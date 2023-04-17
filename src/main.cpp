@@ -6,6 +6,8 @@
 
 void resolveTerminal(Board board);
 
+void continuePlaying(Board board);
+
 //-------------------------- If user want the game to be launched in terminal mode :
 int terminal_game(int arg, char *argu[]){
     Board board;
@@ -36,6 +38,7 @@ int terminal_game(int arg, char *argu[]){
     if (askSolution == 'Y' || askSolution == 'y') {
         std::cout << "Generating Solution...\n";
         resolveTerminal(board);
+        continuePlaying(board);
     }
     else if (askSolution == 'N' || askSolution == 'n') {
         std::cout << "Closing program...\n";
@@ -48,6 +51,41 @@ int terminal_game(int arg, char *argu[]){
 
     return EXIT_SUCCESS;
 }
+
+void continuePlaying(Board board) {
+    char askSolution;
+    std::cout << "Do you want to continue to the next Level Yes (Y) or No (N)? : ";
+    std::cin >> askSolution;
+    if (askSolution == 'Y' || askSolution == 'y') {
+        std::cout << "Generating new Level...\n";
+        board.actualLevel++;
+        board.generate();
+    }
+    else if (askSolution == 'N' || askSolution == 'n') {
+        std::cout << "Closing program...\n";
+    }
+    else {
+        std::cout << "Invalid response. Please enter either Y or N.\n";
+    }
+    std::cout << "Level " << board.actualLevel << "\n" << board << std::endl;
+
+    //Ask to get the solution
+    char askSolution2;
+    std::cout << "Do you want to get the solution of the Level Yes (Y) or No (N)? : ";
+    std::cin >> askSolution2;
+    if (askSolution2 == 'Y' || askSolution2 == 'y') {
+        std::cout << "Generating Solution...\n";
+        resolveTerminal(board);
+        continuePlaying(board);
+    }
+    else if (askSolution2 == 'N' || askSolution2 == 'n') {
+        std::cout << "Closing program...\n";
+    }
+    else {
+        std::cout << "Invalid response. Please enter either Y or N.\n";
+    }
+}
+
 
 void resolveTerminal(Board board) {
     //Solution (Algorithm)
