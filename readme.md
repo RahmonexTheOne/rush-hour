@@ -3,7 +3,9 @@
 
 ## Compilation
 ```shell
+On CLion :
 $ cmake CMakeLists.txt
+On Terminal : 
 $ make config = release
 ```
 
@@ -12,5 +14,5 @@ $ make config = release
 $ cd bin
 $ ./rush-hour 
 Or
-$ ./rush-hour [CHEMIN_DU_FICHIER]
+$ ./rush-hour [Custom_board_path]
 ```
