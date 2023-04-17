@@ -81,7 +81,7 @@ private:
     //check if the car is on exit :
     bool carIsOnExit() const;
     bool carIsOnExit(Car car) const;
-    std::string to_string() const;
+    std::string to_string(Board const& board) const;
     //Test the existence of the board in listBoard
     static bool boardExist(std::unordered_set<std::string > listBoards,std::string stringBoard);
     //Clone Board

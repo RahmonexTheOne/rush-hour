@@ -777,8 +777,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "C:/Users/rahmo/Documents/Git/rush-hour/cmake-build-debug",
-		"source" : "C:/Users/rahmo/Documents/Git/rush-hour"
+		"build" : "C:/Users/rahmo/Documents/Git/rush-hour/src/cmake-build-debug",
+		"source" : "C:/Users/rahmo/Documents/Git/rush-hour/src"
 	},
 	"version" : 
 	{

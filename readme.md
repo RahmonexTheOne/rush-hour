@@ -1,15 +1,16 @@
-# Projet Rush Hour
-## Réalisé par Rahmouni Bilel et Hakoume Manar
+# Project Rush Hour
+## Created by Rahmouni Bilel and Hakoume Manar
 
 ## Compilation
 ```shell
 $ cmake CMakeLists.txt
-$ make
+$ make config = release
 ```
 
-## Exécution
+## Execution
 ```shell
-$ rush-hour 
+$ cd bin
+$ ./rush-hour 
 Or
-$ rush-hour [CHEMIN_DU_FICHIER]
+$ ./rush-hour [CHEMIN_DU_FICHIER]
 ```

@@ -1,4 +1,5 @@
 #include "board.h"
+#include <windows.h>
 #include <stdlib.h>
 #include <time.h>
 
@@ -54,7 +55,7 @@ void resolveTerminal(Board board) {
     //generating th list of moves that leads to the solution
     std::vector<Move> listMoves = board.solutionList();
 
-    unsigned int i = 1;
+   unsigned int i = 1;
     //After each move displays the board
     for(Move move : listMoves){
         board.moveCar(move.m_indexCar, move.m_orientation, move.m_lenght);
@@ -92,5 +93,3 @@ int main(int argc, char *argv[])
 
 }
 //-------------------------------------------------------------------------------------
-
-

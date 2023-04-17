@@ -127,7 +127,7 @@ std::vector<Move> Board::solutionList(const Board src){
     std::queue<Board> listBoardPossible;
     std::unordered_set<std::string > listBoardUsed;
     listBoardPossible.push(src);
-    listBoardUsed.insert(src.to_string());
+    listBoardUsed.insert(to_string(src));
     Board board = src;
 
     while(!listBoardPossible.empty() && !board.carIsOnExit()) {
@@ -138,9 +138,9 @@ std::vector<Move> Board::solutionList(const Board src){
             for (Move moves: listAllMoves) {
                 Board clone = board.cloneBoardWithPossibleMoves(moves);
                 //Create clones to test if they are not duppliucated
-                if (!boardExist(listBoardUsed, clone.to_string())) {
+                if (!boardExist(listBoardUsed, to_string(clone))) {
                     listBoardPossible.push(clone);
-                    listBoardUsed.insert(clone.to_string());
+                    listBoardUsed.insert(to_string(clone));
                 }
             }
         }
@@ -204,35 +204,36 @@ void Board::moveCar(int index, Orientation orientation, unsigned int lenght) {
 
 
 
-//------------------------------------------- Generating a list of moves around a car :
+//------------------------------------------- Generating a list of moves for a car :
 std::vector<Move> Board::getListPossibleMoves(int indexCar)  {
     std::vector<Move> lPossibleMoves;
     unsigned int lenght = 1;
 
-    Car elementDir1 = Car(this->listCar.at(indexCar));
-    elementDir1.move(elementDir1.getOrientation(),1);
-    while(canMove(elementDir1.getFirstPlace(elementDir1.getOrientation()))){
+    Car carMainDirection = Car(this->listCar.at(indexCar));
+    carMainDirection.move(carMainDirection.getOrientation(),1);
+    while(canMove(carMainDirection.getFirstPlace(carMainDirection.getOrientation()))){
+        //To see how many places he can go throught
         lPossibleMoves.push_back(Move(
                 indexCar,
-                elementDir1.getOrientation(),
+                carMainDirection.getOrientation(),
                 lenght++)
         );
-        elementDir1.move(elementDir1.getOrientation(),1);
+        carMainDirection.move(carMainDirection.getOrientation(),1);
     }
 
 
     lenght = 1;
-    Car elementDir2 = Car(this->listCar.at(indexCar));
-    elementDir2.move(elementDir2.getOppositeOrientation(elementDir2.getOrientation()),1);
-    while(canMove(elementDir2.getLastPlace(elementDir2.getOrientation()))){
+    Car carOppositeDirection = Car(this->listCar.at(indexCar));
+    carOppositeDirection.move(carOppositeDirection.getOppositeOrientation(carOppositeDirection.getOrientation()),1);
+    while(canMove(carOppositeDirection.getLastPlace(carOppositeDirection.getOrientation()))){
+        //To see how many places he can go throught
         lPossibleMoves.push_back(Move(
                 indexCar,
-                elementDir2.getOppositeOrientation(elementDir2.getOrientation()),
+                carOppositeDirection.getOppositeOrientation(carOppositeDirection.getOrientation()),
                 lenght++)
         );
-        elementDir2.move(elementDir2.getOppositeOrientation(elementDir2.getOrientation()),1);
+        carOppositeDirection.move(carOppositeDirection.getOppositeOrientation(carOppositeDirection.getOrientation()),1);
     }
-
     return lPossibleMoves;
 }
 
@@ -245,10 +246,12 @@ std::vector<Move> Board::getListPossibleMoves(int indexCar)  {
 
 
 //------------------------------------------------------- Helpfull functions :
-std::string Board::to_string() const {
-    std::stringstream buffer;
-    buffer << *this;
-    return buffer.str();
+//Inspired by https://stackoverflow.com/questions/48336923/structure-to-string-in-elegant-way
+//endlines comes from this function why ??
+std::string Board::to_string(Board const& board) const {
+    std::ostringstream buffer;
+    buffer << board;
+    return std::move(buffer).str();
 }
 //--------------
 bool Board::boardExist(std::unordered_set<std::string > listBoards, std::string stringBoard){

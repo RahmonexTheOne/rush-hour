@@ -10,6 +10,5 @@ add_executable(rush-hour
         src/main.cpp
         src/board.cpp
         src/place.cpp
-        src/car.cpp
-        )
+        src/car.cpp)
 
