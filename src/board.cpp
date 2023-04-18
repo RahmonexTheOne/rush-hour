@@ -74,7 +74,7 @@ void Board::loadLevel(const char* filePath) {
 bool Board::carIsOnExit(Car car) const {
     if(car.getOrientation() == UP){
         if(this->theExit.getRow() == 0){
-            if (abs(car.getFirstPlace(UP).getRow() - this->theExit.getRow())==0){
+            if (abs(car.getFirstPlace(UP).getRow() == this->theExit.getRow())){
                 return true;
             }
             else{
@@ -83,7 +83,7 @@ bool Board::carIsOnExit(Car car) const {
         }
 
         else{
-            if (abs(car.getLastPlace(UP).getRow() - this->theExit.getRow())==0){
+            if (abs(car.getLastPlace(UP).getRow() == this->theExit.getRow())){
                 return true;
             }
             else{
@@ -94,7 +94,7 @@ bool Board::carIsOnExit(Car car) const {
     }
     else{
         if(this->theExit.getColumn() == 0){
-            if (abs(car.getFirstPlace(LEFT).getColumn() - this->theExit.getColumn())==0){
+            if (abs(car.getFirstPlace(LEFT).getColumn() == this->theExit.getColumn())){
                 return true;
             }
             else{
@@ -102,7 +102,7 @@ bool Board::carIsOnExit(Car car) const {
             }
         }
         else{
-            if (abs(car.getLastPlace(LEFT).getColumn() - this->theExit.getColumn())==0){
+            if (abs(car.getLastPlace(LEFT).getColumn() == this->theExit.getColumn())){
                 return true;
             }
             else{
@@ -137,7 +137,7 @@ std::vector<Move> Board::solutionList(const Board src){
             std::vector<Move> listAllMoves = board.getListPossibleMoves(i);
             for (Move moves: listAllMoves) {
                 Board clone = board.cloneBoardWithPossibleMoves(moves);
-                //Create clones to test if they are not duppliucated
+                //Create clones to test if they are not duplicated
                 if (!boardExist(listBoardUsed, to_string(clone))) {
                     listBoardPossible.push(clone);
                     listBoardUsed.insert(to_string(clone));
@@ -145,6 +145,7 @@ std::vector<Move> Board::solutionList(const Board src){
             }
         }
     }
+    //In case an error happens that doesn't lead to the result
     if(!board.carIsOnExit()){
         return std::vector<Move>();
     }
@@ -210,35 +211,35 @@ void Board::moveCar(int index, Orientation orientation, unsigned int lenght) {
 
 //------------------------------------------- Generating a list of moves for a car :
 std::vector<Move> Board::getListPossibleMoves(int indexCar)  {
-    std::vector<Move> lPossibleMoves;
-    unsigned int lenght = 1;
+    std::vector<Move> listPossibleMoves;
+    unsigned int numberOfPlaces = 1;
 
     Car carMainDirection = Car(this->listCar.at(indexCar));
     carMainDirection.move(carMainDirection.getOrientation(),1);
     while(canMove(carMainDirection.getFirstPlace(carMainDirection.getOrientation()))){
-        //To see how many places he can go throught
-        lPossibleMoves.push_back(Move(
+        //To see how many places he can go through
+        listPossibleMoves.emplace_back(
                 indexCar,
                 carMainDirection.getOrientation(),
-                lenght++)
+                numberOfPlaces++
         );
         carMainDirection.move(carMainDirection.getOrientation(),1);
     }
 
 
-    lenght = 1;
+    numberOfPlaces = 1;
     Car carOppositeDirection = Car(this->listCar.at(indexCar));
     carOppositeDirection.move(carOppositeDirection.getOppositeOrientation(carOppositeDirection.getOrientation()),1);
     while(canMove(carOppositeDirection.getLastPlace(carOppositeDirection.getOrientation()))){
         //To see how many places he can go throught
-        lPossibleMoves.push_back(Move(
+        listPossibleMoves.emplace_back(
                 indexCar,
                 carOppositeDirection.getOppositeOrientation(carOppositeDirection.getOrientation()),
-                lenght++)
+                numberOfPlaces++
         );
         carOppositeDirection.move(carOppositeDirection.getOppositeOrientation(carOppositeDirection.getOrientation()),1);
     }
-    return lPossibleMoves;
+    return listPossibleMoves;
 }
 
 //-------------------------------------------------------------------------------------------------

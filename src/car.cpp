@@ -40,21 +40,21 @@ Orientation Car::getOppositeOrientation(Orientation orientation) {
 
 
 //--------------------------------------------------------Move Car :
-void Car::move(Orientation orientation, unsigned int lenght) {
+void Car::move(Orientation orientation, unsigned int nbPlaces) {
     if(this->m_orientation == orientation ||
        this->getOppositeOrientation(orientation) == this->m_orientation){
         switch(orientation){
             case UP:
-                this->m_place.setRow(this->m_place.getRow() - lenght);
+                this->m_place.setRow(this->m_place.getRow() - nbPlaces);
                 break;
             case DOWN:
-                this->m_place.setRow(this->m_place.getRow() + lenght);
+                this->m_place.setRow(this->m_place.getRow() + nbPlaces);
                 break;
             case RIGHT:
-                this->m_place.setColumn(this->m_place.getColumn() + lenght);
+                this->m_place.setColumn(this->m_place.getColumn() + nbPlaces);
                 break;
             case LEFT:
-                this->m_place.setColumn(this->m_place.getColumn() - lenght);
+                this->m_place.setColumn(this->m_place.getColumn() - nbPlaces);
                 break;
         }
     }
